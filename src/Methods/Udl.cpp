@@ -98,8 +98,8 @@ void Udl::run() {
                 } else { //SIM
                     genRksFromSimMatrix();
                 }
-                rkListsBefore = rkLists; //store the original ranked list
             }
+            rkListsBefore = rkLists; //store the original ranked lists
         }
 
         prepareInput();
