@@ -1,6 +1,6 @@
 # Unsupervised Distance Learning Framework
 
-**Authors:** [Lucas Pascotti Valem](https://github.com/lucasPV/) and [Daniel Carlos Guimarães Pedronette] (http://www.ic.unicamp.br/~dcarlos/)
+**Authors:** [Lucas Pascotti Valem](https://github.com/lucasPV/) and [Daniel Carlos Guimarães Pedronette](http://www.ic.unicamp.br/~dcarlos/)
 
 Dept. of Statistic, Applied Math. and Computing, Universidade Estadual Paulista ([UNESP](http://www.rc.unesp.br/)), Rio Claro, Brazil
 
@@ -56,7 +56,7 @@ configuration file that can be passed as a parameter: `./udlf my_conf.ini.` The 
 
 **NOTE:** Complete examples of input files for distinct datasets are available [here](https://github.com/lucasPV/Datasets).
 
-After the execution, a `log.txt` is generated containing the main informations about the execution:
+After the execution, a `log.txt` is generated:
 
 ```
  - GENERAL INFORMATION -
@@ -114,7 +114,7 @@ The first line represents the original retrieval results and the second line, th
 [Corel5k](http://www.ci.gxnu.edu.cn/cbir/Dataset.aspx),
 [MPEG-7](http://www.dabi.temple.edu/~shape/MPEG7/dataset.html),
 [Oxford17Flowers](http://www.robots.ox.ac.uk/~vgg/data/flowers/), and
-[Soccer](http://lear.inrialpes.fr/people/vandeweijer/papers/eccv2006.pdf);
+[Soccer](http://lear.inrialpes.fr/people/vandeweijer/data.html);
 respectively.
 
 ## Documentation
