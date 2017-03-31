@@ -315,7 +315,7 @@ void Udl::readImagesList() {
     std::ifstream inFile;
     inFile.open(listsFile.c_str());
     if (!inFile) {
-        std::cerr << " Unable to open image list file [" << listsFile << "].";
+        std::cerr << " Unable to open image list file [" << listsFile << "].\n";
         exit(1); //terminate with error
     }
     std::string line;
@@ -358,7 +358,7 @@ void Udl::readRkListsNumeric(std::string inputFile) {
     int l = rkLists.size()/n; //get the l value
 
     if (!inFile) {
-        std::cerr << " Unable to open rkLists file [" << inputFile << "].";
+        std::cerr << " Unable to open rkLists file [" << inputFile << "].\n";
         exit(1); //terminate with error
     }
 
@@ -398,7 +398,7 @@ void Udl::readRkListsStr(std::string inputFile) {
     int l = rkLists.size()/n; //get the l value
 
     if (!inFile) {
-        std::cerr << " Unable to open rkLists file [" << inputFile << "].";
+        std::cerr << " Unable to open rkLists file [" << inputFile << "].\n";
         exit(1); //terminate with error
     }
 
@@ -439,7 +439,7 @@ void Udl::readDistMatrix(std::string inputFile) {
     std::ifstream inFile;
     inFile.open(inputFile.c_str());
     if (!inFile) {
-        std::cerr << "Unable to open distances file [" << inputFile.c_str() << "].";
+        std::cerr << "Unable to open distances file [" << inputFile.c_str() << "].\n";
         exit(1); //terminate with error
     }
     std::string line;

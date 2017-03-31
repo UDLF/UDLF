@@ -76,7 +76,7 @@ void Cprr::initDataStructuresUdl() {
 }
 
 void Cprr::initDataStructuresFusion() {
-    std::cout << "Initializing data structures (not implemented)..." << std::endl;
+    std::cout << "Initializing data structures..." << std::endl;
 
     initDataStructuresUdl(); //init the main structures
 
