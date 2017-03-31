@@ -104,7 +104,7 @@ class Contextrr: public Udl {
             std::vector<int> incX;
             std::vector<int> incY;
             std::vector<float> incValue;
-            
+
 };
 
 #endif // CONTEXTRR_HPP

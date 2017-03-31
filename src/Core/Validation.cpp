@@ -169,10 +169,10 @@ bool Validation::parse(std::string line) {
         var.type = getTypeOf(line.substr(posDots+1, posEq-(posDots+1)));
         var.userMustDefine = false;
         var.hasExpectedVal = false;
-        var.defaultVal     = line.substr(posEq+1, line.length()); 
+        var.defaultVal     = line.substr(posEq+1, line.length());
     } else {
         var.type = getTypeOf(line.substr(posDots+1, line.length()));
-        var.userMustDefine = true;  
+        var.userMustDefine = true;
     }
 
     if (var.type == -1) {
@@ -256,7 +256,7 @@ bool Validation::applyValidation(std::map<std::string, std::string>& variables, 
                     for (std::string str : var.expectedVals) {
                         std::cout << str << ",";
                     }
-                    std::cerr << "\b]\n *SETTING: " << name << " = " << var.defaultVal << std::endl; 
+                    std::cerr << "\b]\n *SETTING: " << name << " = " << var.defaultVal << std::endl;
                     variables[name] = var.defaultVal;
                     it->second = var.defaultVal;
                 } else {

@@ -93,7 +93,7 @@ class RlSim: public Udl {
 
             //auxiliar structures
             float* tmpMatrix = NULL;
-            
+
 };
 
 #endif // RLSIM_HPP

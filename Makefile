@@ -80,6 +80,6 @@ TxtFile.o: $(SRC_DIR)/Utils/TxtFile.cpp
 	$(CC) $(FLAGS) -c $(SRC_DIR)/Utils/TxtFile.cpp -o $(OBJ_DIR)/TxtFile.o
 
 
-clean: 
+clean:
 	rm -rf $(OBJ_DIR)
 	rm -rf $(BUILD_DIR)/udlf

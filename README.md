@@ -22,7 +22,7 @@ Currently, seven different [unsupervised learning methods](https://github.com/lu
 [Correlation Graph](http://dx.doi.org/10.1016/j.neucom.2016.03.081),
 [CPRR](http://dx.doi.org/10.1109/SIBGRAPI.2016.042),
 [Rk Graph Dist.](http://dx.doi.org/10.1016/j.patrec.2016.05.021),
-[ReckNNGraph](http://dx.doi.org/10.1016/j.imavis.2013.12.009), 
+[ReckNNGraph](http://dx.doi.org/10.1016/j.imavis.2013.12.009),
 [RL-Recom](http://dx.doi.org/10.1145/2671188.2749336),
 and [RL-Sim*](http://dx.doi.org/10.1145/2671188.2749335)).
 
@@ -48,8 +48,8 @@ The executable is called in the terminal:
 
 The [configuration file](https://github.com/lucasPV/UDLF/wiki/Configuration) specifies everything about the execution:
 the desired task, method being used, dataset information, [input files](https://github.com/lucasPV/UDLF/wiki/File-Formats),
-[output files](https://github.com/lucasPV/UDLF/wiki/File-Formats), 
-[evaluation settings](https://github.com/lucasPV/UDLF/wiki/Evaluation), 
+[output files](https://github.com/lucasPV/UDLF/wiki/File-Formats),
+[evaluation settings](https://github.com/lucasPV/UDLF/wiki/Evaluation),
 and other details.
 When the binary is executed, it searchs for a `config.ini` file in its current directory. The user can also specify a different
 configuration file that can be passed as a parameter: `./udlf my_conf.ini.` The software considers only a single configuration file per execution.
@@ -110,7 +110,7 @@ The first line represents the original retrieval results and the second line, th
 
 ![soccer](https://github.com/lucasPV/UDLF/blob/master/visual_examples/soccer.png)
 
-**NOTE:** The above examples consider the datasets 
+**NOTE:** The above examples consider the datasets
 [Corel5k](http://www.ci.gxnu.edu.cn/cbir/Dataset.aspx),
 [MPEG-7](http://www.dabi.temple.edu/~shape/MPEG7/dataset.html),
 [Oxford17Flowers](http://www.robots.ox.ac.uk/~vgg/data/flowers/), and

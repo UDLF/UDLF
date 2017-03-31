@@ -86,7 +86,7 @@ class Cprr: public Udl {
             //aggregation structures
             float* matrixAgg = NULL;
             std::vector<std::vector<int>> rkListsAgg;
-            
+
 };
 
 #endif // CPRR_HPP

@@ -44,7 +44,7 @@ class None: public Udl {
             void prepareOutput() override;
 
             int l;
-            
+
 };
 
 #endif // NONE_HPP

@@ -69,7 +69,7 @@ class Validation {
             //main config file
             const std::string mainConfFile = "general.conf";
             //file for each methods, stroing ID, name of the file
-            const std::map<std::string, std::string> methodsFile = { {"CPRR", "cprr.conf"}, 
+            const std::map<std::string, std::string> methodsFile = { {"CPRR", "cprr.conf"},
                                                                      {"RLRECOM", "rlrecom.conf"},
                                                                      {"RLSIM", "rlsim.conf"},
                                                                      {"CONTEXTRR", "contextrr.conf"},
