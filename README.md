@@ -27,11 +27,7 @@ Currently, seven different [unsupervised learning methods](https://github.com/lu
 and [RL-Sim*](http://dx.doi.org/10.1145/2671188.2749335)).
 
 ## Binaries
-The project ships with some precompiled binaries inside the **bin/** directory:
-
-- **Linux:** `udlf_linux_x86-64`
-
-- **Windows:** `udlf_windows_x86-64.exe`
+Binaries are available for download in the [release page](https://github.com/lucasPV/UDLF/releases).
 
 ## Compilation
 This project can be compiled by any C++ compiler that supports the C++2011 standard. We recommend `g++ 4.8.4` or later.
