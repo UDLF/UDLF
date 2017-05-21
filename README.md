@@ -1,4 +1,6 @@
-# Unsupervised Distance Learning Framework
+# [Unsupervised Distance Learning Framework](http://www.ic.unicamp.br/~dcarlos/UDLF/index.html)
+
+[Access the official software webpage >>](http://www.ic.unicamp.br/~dcarlos/UDLF/index.html)
 
 **Authors:** [Lucas Pascotti Valem](https://github.com/lucasPV/) and [Daniel Carlos Guimarães Pedronette](http://www.ic.unicamp.br/~dcarlos/)
 
@@ -6,6 +8,7 @@ Dept. of Statistic, Applied Math. and Computing, Universidade Estadual Paulista 
 
 ----------------------
 * [Overview](#overview)
+* [Get Started](#get-started)
 * [Binaries](#binaries)
 * [Compilation](#compilation)
 * [Execution](#execution)
@@ -25,6 +28,9 @@ Currently, seven different [unsupervised learning methods](https://github.com/lu
 [ReckNNGraph](http://dx.doi.org/10.1016/j.imavis.2013.12.009),
 [RL-Recom](http://dx.doi.org/10.1145/2671188.2749336),
 and [RL-Sim*](http://dx.doi.org/10.1145/2671188.2749335)).
+
+## Get Started
+An easy guide for your first use can be found in the [software official webpage](http://www.ic.unicamp.br/%7Edcarlos/UDLF/getStarted.html).
 
 ## Binaries
 Binaries are available for download in the [release page](https://github.com/lucasPV/UDLF/releases).
