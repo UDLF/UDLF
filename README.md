@@ -2,7 +2,7 @@
 
 [Access the official software webpage >>](http://www.ic.unicamp.br/~dcarlos/UDLF/index.html)
 
-**Authors:** [Lucas Pascotti Valem](https://github.com/lucasPV/) and [Daniel Carlos Guimarães Pedronette](http://www.ic.unicamp.br/~dcarlos/)
+**Authors:** [Lucas Pascotti Valem](http://www.lucasvalem.com) and [Daniel Carlos Guimarães Pedronette](http://www.ic.unicamp.br/~dcarlos/)
 
 Dept. of Statistic, Applied Math. and Computing, Universidade Estadual Paulista ([UNESP](http://www.rc.unesp.br/)), Rio Claro, Brazil
 
