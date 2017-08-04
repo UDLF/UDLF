@@ -202,16 +202,11 @@ bool Validation::parse(std::string line) {
 }
 
 /* Given a config file, parses the validation array and fill the validation map */
-bool Validation::fillValidationMap(std::string filename) {
+bool Validation::fillValidationMap(std::string confStr) {
     m_validationMap.clear();
     m_variableSequence.clear();
 
-    std::ifstream file;
-    file.open(filename);
-    if (!file.is_open()) {
-        std::cerr << "Internal config file not found for validation: " << filename << std::endl;
-        return false;
-    }
+    std::istringstream file(confStr);
 
     int lineNum = 1;
     std::string line;
@@ -318,9 +313,8 @@ bool Validation::validate(std::map<std::string, std::string>& variables) {
     /* MAIN VALIDATION */
     std::cout << "General parameters: " << std::endl;
 
-    std::string filename = configDir + mainConfFile;
-    if (!fillValidationMap(filename)) {
-        std::cerr << "Couldn't fill validation map for " << mainConfFile << " file!" << std::endl;
+    if (!fillValidationMap(mainConfStr)) {
+        std::cerr << "Couldn't fill validation map! Check your config/*.conf files and try to recompile your executable!" << std::endl;
         return false;
     }
 
@@ -335,11 +329,10 @@ bool Validation::validate(std::map<std::string, std::string>& variables) {
     auto it = variables.find(methodParam); //the method must be defined there at this point
     std::string method = it->second;
 
-    auto it2 = methodsFile.find(method);
-
-    filename = configDir + it2->second;
-    if (!fillValidationMap(filename)) {
-        std::cerr << "Couldn't fill validation map for " << it2->second << " file!" << std::endl;
+    auto it2 = methodsConfStr.find(method);
+    std::string methodConfStr = it2->second;
+    if (!fillValidationMap(methodConfStr)) {
+        std::cerr << "Couldn't fill validation map! Check your config/*.conf files and try to recompile your executable!" << std::endl;
         return false;
     }
 

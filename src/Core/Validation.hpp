@@ -32,6 +32,8 @@
 #include <vector>
 #include <array>
 
+#include "Conf.cpp" //specifies the internal configuration files
+
 class Validation {
     public:
             Validation();
@@ -40,15 +42,15 @@ class Validation {
 
     private:
             struct varInfo {
-                int type;                                                   //0 - STR; 1 - INT; 2 - DBL; 3 - BOL
-                bool userMustDefine;                                        //If true and the user hasn't defined, abort
-                std::string defaultVal;                                     //Default value
-                bool hasExpectedVal;                                        //False = can be anything of the type; True = need to be one of the specfied
-                std::vector<std::string> expectedVals;                      //Expected values
+                int type;                                                //0 - STR; 1 - INT; 2 - DBL; 3 - BOL
+                bool userMustDefine;                                     //If true and the user hasn't defined, abort
+                std::string defaultVal;                                  //Default value
+                bool hasExpectedVal;                                     //False = can be anything of the type; True = need to be one of the specfied
+                std::vector<std::string> expectedVals;                   //Expected values
                 std::map<std::string, struct varInfo> vectorVariables;
             };
 
-            bool fillValidationMap(std::string filename);
+            bool fillValidationMap(std::string confStr);
             bool applyValidation(std::map<std::string, std::string>& variables,
                                  std::map<std::string, struct varInfo>& validationMap,
                                  std::vector<std::string>& variableSequence);
@@ -63,21 +65,20 @@ class Validation {
             std::map<std::string, struct varInfo> m_validationMap;
             std::vector<std::string> m_variableSequence; //keep the sequence when inserting values in the validationMap
 
-            /* Configuration files */
-            //path to the directory where the config files are (these files are the base of validation)
-            const std::string configDir = "../config/";
+            /* Internal configuration files */
+            //these files are the base of validation and are embedded into the binary at compile time
             //main config file
-            const std::string mainConfFile = "general.conf";
-            //file for each methods, stroing ID, name of the file
-            const std::map<std::string, std::string> methodsFile = { {"CPRR", "cprr.conf"},
-                                                                     {"RLRECOM", "rlrecom.conf"},
-                                                                     {"RLSIM", "rlsim.conf"},
-                                                                     {"CONTEXTRR", "contextrr.conf"},
-                                                                     {"RECKNNGRAPH", "recknngraph.conf"},
-                                                                     {"RKGRAPH", "rkgraph.conf"},
-                                                                     {"CORGRAPH", "corgraph.conf"},
-                                                                     {"NONE", "none.conf"}
-                                                                   };
+            const std::string mainConfStr = confGeneral;
+            //file for each method, string ID, name of the file
+            const std::map<std::string, std::string> methodsConfStr = { {"CPRR", confCprr},
+                                                                        {"RLRECOM", confRlrecom},
+                                                                        {"RLSIM", confRlsim},
+                                                                        {"CONTEXTRR", confContextrr},
+                                                                        {"RECKNNGRAPH", confRecknngraph},
+                                                                        {"RKGRAPH", confRkgraph},
+                                                                        {"CORGRAPH", confCorgraph},
+                                                                        {"NONE", confNone}
+                                                                      };
             //in case you want to change the parameter that defines the method to be used, make sure to change it here too
             const std::string methodParam = "UDL_METHOD";
 };
