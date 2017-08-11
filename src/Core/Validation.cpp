@@ -232,38 +232,37 @@ bool Validation::applyValidation(std::map<std::string, std::string>& variables, 
         struct varInfo var = validationMap[name];
 
         auto it = variables.find(name);
+        std::string& value = variables[name];
         if (var.userMustDefine) {
             if (it == variables.end()) {
                 std::cerr << " *ERROR: You haven't declared " << name << "! You must declare it! Aborting..." << std::endl;
                 return false;
             } else {
-                std::cout << " " << name << " = " << it->second << std::endl;
+                std::cout << " " << name << " = " << value << std::endl;
             }
         } else {
             if (it == variables.end()) {
                 variables[name] = var.defaultVal;
                 std::cerr << " *WARNING: You haven't declared " << name << "!\n *SETTING: " << name << " = " << var.defaultVal << std::endl;
-                it->second = var.defaultVal;
             } else if (var.hasExpectedVal) {
-                if (!checkExpected(it->second, var.expectedVals)) {
-                    std::cerr << " *WARNING: You've declared " << name << " = " << it->second << "!";
+                if (!checkExpected(value, var.expectedVals)) {
+                    std::cerr << " *WARNING: You've declared " << name << " = " << value << "!";
                     std::cerr << " Expected values are: [";
                     for (std::string str : var.expectedVals) {
                         std::cout << str << ",";
                     }
                     std::cerr << "\b]\n *SETTING: " << name << " = " << var.defaultVal << std::endl;
                     variables[name] = var.defaultVal;
-                    it->second = var.defaultVal;
                 } else {
-                    std::cout << " " << name << " = " << it->second << std::endl;
+                    std::cout << " " << name << " = " << value << std::endl;
                 }
             } else {
-                std::cout << " " << name << " = " << it->second << std::endl;
+                std::cout << " " << name << " = " << value << std::endl;
             }
         }
 
-        if (!checkType(it->second, var.type)) {
-            std::cerr << " *WARNING: Type of " << name << " is " << getTypeOf(var.type) << "! " << it->second << " is invalid!" << std::endl;
+        if (!checkType(value, var.type)) {
+            std::cerr << " *WARNING: Type of " << name << " is " << getTypeOf(var.type) << "! " << value << " is invalid!" << std::endl;
             if (var.userMustDefine) {
                 std::cerr << "This parameter needs to be specified correctly! Aborting..." << std::endl;
                 return false;
@@ -278,7 +277,7 @@ bool Validation::applyValidation(std::map<std::string, std::string>& variables, 
         }
 
         if (!var.vectorVariables.empty()) {
-            int value = std::stoi(it->second);
+            int value = std::stoi(variables[name]);
             std::map<std::string, struct varInfo> tmp;
             std::vector<std::string> tmpSeq;
             tmp.clear();
