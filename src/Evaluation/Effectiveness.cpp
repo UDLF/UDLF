@@ -195,7 +195,8 @@ float Effectiveness::computeAveragePrecision(int qId, int d, int offset) {
         }
     }
     float nRel = getClassSize(getClass(qId));
-    float avgPrecision = sumPrecision / nRel ;
+    float l = rkLists.size()/n;
+    float avgPrecision = sumPrecision / std::min(l, nRel);
     mapByClass[qClass] += avgPrecision;
     return avgPrecision;
 }
