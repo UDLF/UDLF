@@ -77,7 +77,8 @@ class Validation {
                                                                         {"RECKNNGRAPH", confRecknngraph},
                                                                         {"RKGRAPH", confRkgraph},
                                                                         {"CORGRAPH", confCorgraph},
-                                                                        {"NONE", confNone}
+                                                                        {"LHRR", confLhrr},
+                                                                        {"NONE", confNone},
                                                                       };
             //in case you want to change the parameter that defines the method to be used, make sure to change it here too
             const std::string methodParam = "UDL_METHOD";

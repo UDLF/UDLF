@@ -59,3 +59,7 @@ const char confRlrecom[] =
 const char confRlsim[] =
     #include "../config/rlsim.conf"
 ;
+
+const char confLhrr[] =
+	#include "../config/lhrr.conf"
+;
