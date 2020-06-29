@@ -281,7 +281,8 @@ void Udl::initMatrix(float*& matrix) {
     std::cout << "\t - Intializing Distance Matrix ..." << std::endl;
 
     delete [] matrix;
-    matrix = new float[n*n]();  //initialize all values to zero, but allocate memory immediately
+    long int nN = ((long int) n)*n;
+    matrix = new float[nN]();  //initialize all values to zero, but allocate memory immediately
 
     std::cout << "\t - Matrix Successfully Initialized ..." << std::endl;
 }
@@ -291,9 +292,10 @@ void Udl::initSparseMatrix(float*& matrix) {
     std::cout << "\t - Intializing Sparse Distance Matrix ..." << std::endl;
 
     delete [] matrix;
-    matrix = new float[n*n];
+    long int nN = ((long int) n)*n;
+    matrix = new float[nN];
 
-    for (long int l = 0; l < n*n; l++) {
+    for (long int l = 0; l < nN; l++) {
         if (matrix[l] != 0) {
             matrix[l] = 0;
         }
@@ -675,8 +677,8 @@ void Udl::exportDistMatrix(std::string path) {
     //export distance matrix to file
     std::ofstream file;
     file.open(path);
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n; j++) {
+    for (long int i = 0; i < n; i++) {
+        for (long int j = 0; j < n; j++) {
             file << matrix[n*i + j] << " ";
         }
         file << "\n";
@@ -692,11 +694,12 @@ void Udl::genDistMatrixFromRks() {
 
     //given the ranked lists, fill the matrix with the positions
     int l = rkLists.size()/n;
-    for (long int i = 0; i < n*n; i++) {
+    long int nN = ((long int) n)*n;
+    for (long int i = 0; i < nN; i++) {
         matrix[i] = l;
     }
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < l; j++) {
+    for (long int i = 0; i < n; i++) {
+        for (long int j = 0; j < l; j++) {
             int img = rkLists[l*i + j];
             matrix[n*i + img] += j - l;
         }
@@ -710,8 +713,8 @@ void Udl::genSimMatrixFromRks() {
 
     //given the ranked lists, fill the matrix with the positions
     int l = rkLists.size()/n;
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < l; j++) {
+    for (long int i = 0; i < n; i++) {
+        for (long int j = 0; j < l; j++) {
             int img = rkLists[l*i + j];
             matrix[n*i + img] = l - j;
         }
@@ -749,14 +752,16 @@ void Udl::genRksFromSimMatrix() {
 
 /* Converts similarity matrix to distance matrix */
 void Udl::convertSimToDistMatrix() {
-    for (long int i = 0; i < n*n; i++) {
+    long int nN = ((long int) n)*n;
+    for (long int i = 0; i < nN; i++) {
         matrix[i] = 1/(1 + matrix[i]);
     }
 }
 
 /* Converts distance matrix to similarity matrix */
 void Udl::convertDistToSimMatrix() {
-    for (long int i = 0; i < n*n; i++) {
+    long int nN = ((long int) n)*n;
+    for (long int i = 0; i < nN; i++) {
         matrix[i] = 1/(1 + matrix[i]);
     }
 }
