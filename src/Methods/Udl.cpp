@@ -602,7 +602,7 @@ void Udl::exportRkListsHtml(Effectiveness& effectiveness, std::string path) {
                     baseClass = effectiveness.getClass(imgI);
                 }
 
-                file << "<table cellspacing=\"2\" cellpadding=\"2\" border=\"0\" bordercolor=\"black\"  BGCOLOR=\"#000000\"><tr>\n";
+                file << "<table cellspacing=\"3\" cellpadding=\"5\" border=\"0\" bordercolor=\"white\"  BGCOLOR=\"#FFFFFF\"><tr>\n";
                 file << std::setfill('0') << std::setw(Type::numDigits(n)) << i+1 << "\n";
                 if (htmlColors) {
                     file << "<td bgcolor=\"#00FF00\"><img src=\"file://" << imagesPath << imgList[imgI] << "\" width=\"80\" height=\"80\"></td>\n";
@@ -632,7 +632,7 @@ void Udl::exportRkListsHtml(Effectiveness& effectiveness, std::string path) {
             if (htmlColors) {
                 baseClass = effectiveness.getClass(imgI);
             }
-            file << "<table cellspacing=\"2\" cellpadding=\"2\" border=\"0\" bordercolor=\"black\"  BGCOLOR=\"#000000\"><tr>\n";
+            file << "<table cellspacing=\"3\" cellpadding=\"5\" border=\"0\" bordercolor=\"white\"  BGCOLOR=\"#FFFFFF\"><tr>\n";
             file << "<br>";
             if (htmlColors) {
                 file << "<td bgcolor=\"#00FF00\"><img src=\"file://" << imagesPath << imgList[imgI] << "\" width=\"80\" height=\"80\"></td>\n";
