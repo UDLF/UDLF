@@ -20,7 +20,7 @@ Dept. of Statistic, Applied Math. and Computing, Universidade Estadual Paulista 
 
 ## Overview
 A framework of unsupervised distance learning methods for image and multimedia retrieval tasks.
-Currently, nine different [unsupervised learning methods](https://github.com/lucasPV/UDLF/wiki/Methods) are implemented
+Currently, nine different [unsupervised learning methods](https://github.com/UDLF/UDLF/wiki/Methods) are implemented
 ([BFSTree](https://doi.org/10.1016/j.patcog.2020.107666),
 [LHRR](http://doi.org/10.1109/TIP.2019.2920526),
 [ContextRR](http://dl.acm.org/citation.cfm?id=1948207.1948291),
@@ -35,7 +35,7 @@ and [RL-Sim*](http://dx.doi.org/10.1145/2671188.2749335)).
 An easy guide for your first use can be found in the [software official webpage](http://www.ic.unicamp.br/%7Edcarlos/UDLF/getStarted.html).
 
 ## Binaries
-Binaries are available for download in the [release page](https://github.com/lucasPV/UDLF/releases).
+Binaries are available for download in the [release page](https://github.com/UDLF/UDLF/releases).
 
 ## Compilation
 This project can be compiled by any C++ compiler that supports the C++2011 standard. We recommend `g++ 4.8.4` or later.
@@ -50,15 +50,15 @@ The executable is called in the terminal:
 
 **NOTE:** The binary must be executed inside the **bin/** directory.
 
-The [configuration file](https://github.com/lucasPV/UDLF/wiki/Configuration) specifies everything about the execution:
-the desired task, method being used, dataset information, [input files](https://github.com/lucasPV/UDLF/wiki/File-Formats),
-[output files](https://github.com/lucasPV/UDLF/wiki/File-Formats),
-[evaluation settings](https://github.com/lucasPV/UDLF/wiki/Evaluation),
+The [configuration file](https://github.com/UDLF/UDLF/wiki/Configuration) specifies everything about the execution:
+the desired task, method being used, dataset information, [input files](https://github.com/UDLF/UDLF/wiki/File-Formats),
+[output files](https://github.com/UDLF/UDLF/wiki/File-Formats),
+[evaluation settings](https://github.com/UDLF/UDLF/wiki/Evaluation),
 and other details.
 When the binary is executed, it searchs for a `config.ini` file in its current directory. The user can also specify a different
 configuration file that can be passed as a parameter: `./udlf my_conf.ini.` The software considers only a single configuration file per execution.
 
-**NOTE:** Complete examples of input files for distinct datasets are available [here](https://github.com/lucasPV/Datasets).
+**NOTE:** Complete examples of input files for distinct datasets are available [here](https://github.com/UDLF/Datasets).
 
 After the execution, a `log.txt` is generated:
 
@@ -101,18 +101,18 @@ After the execution, a `log.txt` is generated:
  Log generated at 2017/1/26 16:37:24
 ```
 
-The results can be exported in [different formats](https://github.com/lucasPV/UDLF/wiki/File-Formats).
+The results can be exported in [different formats](https://github.com/UDLF/UDLF/wiki/File-Formats).
 Below you can see some examples of ranked lists that were exported as a *html* page.
 The query images are presented in green borders and wrong results in red borders.
 The first line represents the original retrieval results and the second line, the results after the algorithm execution.
 
-![corel5k](https://github.com/lucasPV/UDLF/blob/master/visual_examples/corel5k.png)
+![corel5k](https://github.com/UDLF/UDLF/blob/master/visual_examples/corel5k.png)
 
-![mpeg7](https://github.com/lucasPV/UDLF/blob/master/visual_examples/mpeg7.png)
+![mpeg7](https://github.com/UDLF/UDLF/blob/master/visual_examples/mpeg7.png)
 
-![oxford17flowers](https://github.com/lucasPV/UDLF/blob/master/visual_examples/oxford17flowers.png)
+![oxford17flowers](https://github.com/UDLF/UDLF/blob/master/visual_examples/oxford17flowers.png)
 
-![soccer](https://github.com/lucasPV/UDLF/blob/master/visual_examples/soccer.png)
+![soccer](https://github.com/UDLF/UDLF/blob/master/visual_examples/soccer.png)
 
 **NOTE:** The above examples consider the datasets
 [Corel5k](http://www.ci.gxnu.edu.cn/cbir/Dataset.aspx),
@@ -122,21 +122,21 @@ The first line represents the original retrieval results and the second line, th
 respectively.
 
 ## Documentation
-The documentation is available in the [software wiki.](https://github.com/lucasPV/UDLF/wiki)
+The documentation is available in the [software wiki.](https://github.com/UDLF/UDLF/wiki)
 
 ## Contributing
 We appreciate suggestions, ideas and contributions.
 If you want to contribute, feel free to [contact us.](#contact)
 Github pull requests should be avoided because they are not part of our review process.
-To report small bugs, you can use the [issue tracker](https://github.com/lucasPV/UDLF/issues) provided by GitHub.
+To report small bugs, you can use the [issue tracker](https://github.com/UDLF/UDLF/issues) provided by GitHub.
 
 ## Contact
-**Lucas Pascotti Valem**: `lucaspascottivalem@gmail.com` or `lucasvalem@rc.unesp.br`
+**Lucas Pascotti Valem**: `lucaspascottivalem@gmail.com` or `lucas.valem@unesp.br`
 
-**Daniel Carlos Guimarães Pedronette**: `daniel@rc.unesp.br`
+**Daniel Carlos Guimarães Pedronette**: `daniel.pedronette@unesp.br`
 
 ## Acknowledgments
 The authors are grateful to São Paulo Research Foundation - [FAPESP](http://www.fapesp.br/en/) (grants 2013/08645-0, and 2014/04220-8).
 
 ## License
-This project is licensed under GPLv2. See [details.](https://github.com/lucasPV/UDLF/blob/master/LICENSE)
+This project is licensed under GPLv2. See [details.](https://github.com/UDLF/UDLF/blob/master/LICENSE)
