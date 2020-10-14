@@ -61,5 +61,9 @@ const char confRlsim[] =
 ;
 
 const char confLhrr[] =
-	#include "../config/lhrr.conf"
+    #include "../config/lhrr.conf"
+;
+
+const char confBfstree[] =
+    #include "../config/bfstree.conf"
 ;

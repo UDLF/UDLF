@@ -35,6 +35,7 @@
 #include "Utils/Type.hpp"
 #include "Methods/Udl.hpp"
 #include "Methods/None.hpp"
+#include "Methods/BFSTree.hpp"
 #include "Methods/LHRR.hpp"
 #include "Methods/Cprr.hpp"
 #include "Methods/RlRecom.hpp"
@@ -219,9 +220,12 @@ void Exec::run() {
     if (method == "NONE") {
         None none;
         none.run();
-	} else if (method == "LHRR") {
-		LHRR lhrr;
-		lhrr.run();
+    } else if (method == "BFSTREE") {
+        BFSTree bfstree;
+        bfstree.run();
+    } else if (method == "LHRR") {
+        LHRR lhrr;
+        lhrr.run();
     } else if (method == "CPRR") {
         Cprr cprr;
         cprr.run();

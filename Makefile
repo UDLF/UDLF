@@ -1,7 +1,7 @@
 CC        = g++
 CCOPTION  = I./src std=gnu++11 O3
 FLAGS     = $(addprefix -,$(CCOPTION))
-OBJ       = Main.o Exec.o Validation.o Udl.o None.o Cprr.o RlRecom.o RlSim.o Contextrr.o ReckNNGraph.o RkGraph.o CorrelationGraph.o Effectiveness.o Type.o Time.o TxtFile.o LHRR.o
+OBJ       = Main.o Exec.o Validation.o Udl.o None.o Cprr.o RlRecom.o RlSim.o Contextrr.o ReckNNGraph.o RkGraph.o CorrelationGraph.o Effectiveness.o Type.o Time.o TxtFile.o LHRR.o BFSTree.o
 OBJ_DIR   = obj
 SRC_DIR   = src
 BUILD_DIR = bin
@@ -61,6 +61,14 @@ CorrelationGraph.o: $(SRC_DIR)/Methods/CorrelationGraph.cpp
 	mkdir -p $(OBJ_DIR)
 	$(CC) $(FLAGS) -c $(SRC_DIR)/Methods/CorrelationGraph.cpp -o $(OBJ_DIR)/CorrelationGraph.o
 
+LHRR.o: $(SRC_DIR)/Methods/LHRR.cpp
+	mkdir -p $(OBJ_DIR)
+	$(CC) $(FLAGS) -c $(SRC_DIR)/Methods/LHRR.cpp -o $(OBJ_DIR)/LHRR.o
+
+BFSTree.o: $(SRC_DIR)/Methods/BFSTree.cpp
+	mkdir -p $(OBJ_DIR)
+	$(CC) $(FLAGS) -c $(SRC_DIR)/Methods/BFSTree.cpp -o $(OBJ_DIR)/BFSTree.o
+
 #Evaluation
 Effectiveness.o: $(SRC_DIR)/Evaluation/Effectiveness.cpp
 	mkdir -p $(OBJ_DIR)
@@ -83,9 +91,3 @@ TxtFile.o: $(SRC_DIR)/Utils/TxtFile.cpp
 clean:
 	rm -rf $(OBJ_DIR)
 	rm -rf $(BUILD_DIR)/udlf
-
-
-#LHRR
-LHRR.o: $(SRC_DIR)/Methods/LHRR.cpp
-	mkdir -p $(OBJ_DIR)
-	$(CC) $(FLAGS) -c $(SRC_DIR)/Methods/LHRR.cpp -o $(OBJ_DIR)/LHRR.o

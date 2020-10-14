@@ -78,6 +78,7 @@ class Validation {
                                                                         {"RKGRAPH", confRkgraph},
                                                                         {"CORGRAPH", confCorgraph},
                                                                         {"LHRR", confLhrr},
+                                                                        {"BFSTREE", confBfstree},
                                                                         {"NONE", confNone},
                                                                       };
             //in case you want to change the parameter that defines the method to be used, make sure to change it here too
