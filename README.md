@@ -20,8 +20,9 @@ Dept. of Statistic, Applied Math. and Computing, Universidade Estadual Paulista 
 
 ## Overview
 A framework of unsupervised distance learning methods for image and multimedia retrieval tasks.
-Currently, nine different [unsupervised learning methods](https://github.com/UDLF/UDLF/wiki/Methods) are implemented
-([BFSTree](https://doi.org/10.1016/j.patcog.2020.107666),
+Currently, ten different [unsupervised learning methods](https://github.com/UDLF/UDLF/wiki/Methods) are implemented
+(RDPAC,
+[BFSTree](https://doi.org/10.1016/j.patcog.2020.107666),
 [LHRR](http://doi.org/10.1109/TIP.2019.2920526),
 [ContextRR](http://dl.acm.org/citation.cfm?id=1948207.1948291),
 [Correlation Graph](http://dx.doi.org/10.1016/j.neucom.2016.03.081),
