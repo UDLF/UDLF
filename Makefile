@@ -1,7 +1,7 @@
 CC        = g++
 CCOPTION  = I./src std=gnu++11 O3
 FLAGS     = $(addprefix -,$(CCOPTION))
-OBJ       = Main.o Exec.o Validation.o Udl.o None.o Cprr.o RlRecom.o RlSim.o Contextrr.o ReckNNGraph.o RkGraph.o CorrelationGraph.o Effectiveness.o Type.o Time.o TxtFile.o LHRR.o BFSTree.o
+OBJ       = Main.o Exec.o Validation.o Udl.o None.o Cprr.o RlRecom.o RlSim.o Contextrr.o ReckNNGraph.o RkGraph.o CorrelationGraph.o Effectiveness.o Type.o Time.o TxtFile.o LHRR.o BFSTree.o RDPAC.o
 OBJ_DIR   = obj
 SRC_DIR   = src
 BUILD_DIR = bin
@@ -68,6 +68,10 @@ LHRR.o: $(SRC_DIR)/Methods/LHRR.cpp
 BFSTree.o: $(SRC_DIR)/Methods/BFSTree.cpp
 	mkdir -p $(OBJ_DIR)
 	$(CC) $(FLAGS) -c $(SRC_DIR)/Methods/BFSTree.cpp -o $(OBJ_DIR)/BFSTree.o
+
+RDPAC.o: $(SRC_DIR)/Methods/RDPAC.cpp
+	mkdir -p $(OBJ_DIR)
+	$(CC) $(FLAGS) -c $(SRC_DIR)/Methods/RDPAC.cpp -o $(OBJ_DIR)/RDPAC.o
 
 #Evaluation
 Effectiveness.o: $(SRC_DIR)/Evaluation/Effectiveness.cpp

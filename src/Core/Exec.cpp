@@ -35,6 +35,7 @@
 #include "Utils/Type.hpp"
 #include "Methods/Udl.hpp"
 #include "Methods/None.hpp"
+#include "Methods/RDPAC.hpp"
 #include "Methods/BFSTree.hpp"
 #include "Methods/LHRR.hpp"
 #include "Methods/Cprr.hpp"
@@ -220,6 +221,9 @@ void Exec::run() {
     if (method == "NONE") {
         None none;
         none.run();
+    } else if (method == "RDPAC") {
+        RDPAC rdpac;
+        rdpac.run();
     } else if (method == "BFSTREE") {
         BFSTree bfstree;
         bfstree.run();

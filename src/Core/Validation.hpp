@@ -79,6 +79,7 @@ class Validation {
                                                                         {"CORGRAPH", confCorgraph},
                                                                         {"LHRR", confLhrr},
                                                                         {"BFSTREE", confBfstree},
+                                                                        {"RDPAC",confRdpac},
                                                                         {"NONE", confNone},
                                                                       };
             //in case you want to change the parameter that defines the method to be used, make sure to change it here too

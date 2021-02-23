@@ -67,3 +67,7 @@ const char confLhrr[] =
 const char confBfstree[] =
     #include "../config/bfstree.conf"
 ;
+
+const char confRdpac[] =
+	#include "../config/rdpac.conf"
+;
