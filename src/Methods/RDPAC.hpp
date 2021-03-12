@@ -11,7 +11,7 @@
  *    PEDRONETTE, D. C. G.; VALEM, L. P.; LATECKI, L. J. .
  *    Efficient Rank-based Diffusion Process with Assured Convergence.
  *    Journal of Imaging (ISSN 2313-433X).
- *    (Under minor revision)
+ *    https://doi.org/10.3390/jimaging7030049
  *
  *******************************************************************************************************************
  *
