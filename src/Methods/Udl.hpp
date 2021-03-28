@@ -81,7 +81,7 @@ class Udl {
             void convertDistToSimMatrix();
 
             //general structures for all methods
-            int n; //dataset size
+            long int n; //dataset size
             std::vector<std::string> imgList;
             std::vector<int> rkLists;
             float* matrix = NULL;

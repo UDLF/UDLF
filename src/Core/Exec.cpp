@@ -125,6 +125,22 @@ void Exec::getConfigVariable(std::string& dest, std::string variable) {
     }
 }
 
+/* Gives the value of a variable of the config file as long int */
+void Exec::getConfigVariable(long int& dest, std::string variable) {
+    dest = 0;
+
+    auto it = m_variables.find(variable);
+    if (it != m_variables.end()) {
+        if (!Type::isInteger(it->second)) {
+            std::cerr << variable << " (" << it->second << ") can't be converted to long int! Returning 0!" << std::endl;
+            return;
+        }
+        dest = stoi(it->second);
+    } else {
+        std::cerr << "Variable " << variable << " couldn't be found!" << std::endl;
+    }
+}
+
 /* Gives the value of a variable of the config file as int */
 void Exec::getConfigVariable(int& dest, std::string variable) {
     dest = 0;

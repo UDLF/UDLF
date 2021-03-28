@@ -38,6 +38,7 @@ class Exec {
             bool parseFile(std::string filename);
             void insertElementInMap(std::string name, std::string val);
             void getConfigVariable(std::string& dest, std::string variable);
+            void getConfigVariable(long int& dest, std::string variable);
             void getConfigVariable(int& dest, std::string variable);
             void getConfigVariable(double& dest, std::string variable);
             void getConfigVariable(bool& dest, std::string variable);

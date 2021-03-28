@@ -36,7 +36,7 @@
 
 class Effectiveness {
     public:
-            Effectiveness(int& n_in,
+            Effectiveness(long int& n_in,
                           std::vector<int>& rkLists_in,
                           std::vector<std::string>& imgList_in);
             //Recall
@@ -67,7 +67,7 @@ class Effectiveness {
             int getClassSize(std::string classname);
 
             //Variables
-            const int& n;
+            const long int& n;
             const std::vector<int>& rkLists;
             const std::vector<std::string>& imgList;
             std::map<std::string, std::string> classes;

@@ -28,7 +28,7 @@
 #include "Utils/Type.hpp"
 
 /* Constructor */
-Effectiveness::Effectiveness(int& n_in,
+Effectiveness::Effectiveness(long int& n_in,
                              std::vector<int>& rkLists_in,
                              std::vector<std::string>& imgList_in)
 : n(n_in)
