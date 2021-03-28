@@ -87,6 +87,31 @@ void Effectiveness::fillPrecisionsMap(std::map<int, float>& precisions, std::str
     } while (pos != -1);
 }
 
+void Effectiveness::fillRecallsMap(std::map<int, float>& recalls, std::string recallsToCompute) {
+    std::cout << "\n Computing Recalls ...";
+
+    recalls.clear();
+
+    int l = rkLists.size()/n;
+    int pos;
+    std::string str = recallsToCompute;
+    do {
+        pos = str.find(",", 0);
+        std::string elemStr = str.substr(0, pos);
+        if (!Type::isInteger(elemStr)) {
+            std::cerr << "\nERROR: Invalid string to compute recalls: " << recallsToCompute << " ! Aborting ...\n";
+            exit(1); // terminate with error
+        }
+        int elem = stoi(elemStr);
+        if ( (elem == 0) || (elem > l) ) {
+            std::cerr << "\nERROR: Can't compute Recall@" << elem << "! Aborting ...\n";
+            exit(1); // terminate with error
+        }
+        recalls[elem] = computeRecall(elem);
+        str = str.substr(pos+1, str.length());
+    } while (pos != -1);
+}
+
 float Effectiveness::computePrecision(int k) {
     int l = rkLists.size()/n; // get the l value
 
@@ -150,8 +175,6 @@ float Effectiveness::computeFinalRecall() {
 }
 
 float Effectiveness::computeRecall(int recallAt) {
-    std::cout << "\n Computing Recall@" << recallAt << " ...";
-
     startMAPByClass();
     computeShowResults(recallAt);
     return computeFinalRecall();

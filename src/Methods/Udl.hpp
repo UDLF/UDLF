@@ -109,7 +109,7 @@ class Udl {
             bool computePrecisions;
             bool computeRecall;
             bool computeMap;
-            int recallAt;
+            std::string recallsToCompute;
             std::string precisionsToCompute;
 
     private:
@@ -155,10 +155,10 @@ class Udl {
             //effectiveness evalution variables
             std::map<int, float> precisionsBefore;
             std::map<int, float> precisionsAfter;
+            std::map<int, float> recallsBefore;
+            std::map<int, float> recallsAfter;
             float mapBefore;
             float mapAfter;
-            float recallBefore;
-            float recallAfter;
 
 };
 

@@ -59,7 +59,7 @@ Udl::Udl() {
     exec.getConfigVariable(computePrecisions,   "EFFECTIVENESS_COMPUTE_PRECISIONS");
     exec.getConfigVariable(computeMap,          "EFFECTIVENESS_COMPUTE_MAP");
     exec.getConfigVariable(computeRecall,       "EFFECTIVENESS_COMPUTE_RECALL");
-    exec.getConfigVariable(recallAt,            "EFFECTIVENESS_RECALL_AT");
+    exec.getConfigVariable(recallsToCompute,    "EFFECTIVENESS_RECALLS_TO_COMPUTE");
     exec.getConfigVariable(precisionsToCompute, "EFFECTIVENESS_PRECISIONS_TO_COMPUTE");
 
     exec.getConfigVariable(n, "SIZE_DATASET");
@@ -109,11 +109,11 @@ void Udl::run() {
         if (computePrecisions) {
             effectiveness.fillPrecisionsMap(precisionsBefore, precisionsToCompute);
         }
+        if (computeRecall) {
+            effectiveness.fillRecallsMap(recallsBefore, recallsToCompute);
+        }
         if (computeMap) {
             mapBefore = effectiveness.computeMAPMeasure();
-        }
-        if (computeRecall) {
-            recallBefore = effectiveness.computeRecall(recallAt);
         }
         std::cout << "\n";
     }
@@ -142,7 +142,7 @@ void Udl::run() {
             mapAfter = effectiveness.computeMAPMeasure();
         }
         if (computeRecall) {
-            recallAfter = effectiveness.computeRecall(recallAt);
+            effectiveness.fillRecallsMap(recallsAfter, recallsToCompute);
         }
         std::cout << "\n";
     }
@@ -231,7 +231,9 @@ void Udl::generateExecutionLog() {
                     }
                 }
                 if (computeRecall) {
-                    file << "\n\t Recall@" << recallAt << "\t" << recallBefore;
+                    for (auto const& elem : recallsBefore) {
+                        file << "\n\t Recall@" << elem.first << "\t" << elem.second;
+                    }
                 }
                 if (computeMap) {
                     file << "\n\t MAP\t\t" << mapBefore;
@@ -244,7 +246,9 @@ void Udl::generateExecutionLog() {
                 }
             }
             if (computeRecall) {
-                file << "\n\t Recall@" << recallAt << "\t" << recallAfter;
+                for (auto const& elem : recallsAfter) {
+                    file << "\n\t Recall@" << elem.first << "\t" << elem.second;
+                }
             }
             if (computeMap) {
                 file << "\n\t MAP\t\t" << mapAfter;
@@ -260,7 +264,12 @@ void Udl::generateExecutionLog() {
                     }
                 }
                 if (computeRecall) {
-                    file << "\n\t Recall@" << recallAt << "\t" << ((recallAfter-recallBefore)/recallBefore)*100 << "\%";
+                    for (auto const& elem : recallsAfter) {
+                        int value = elem.first;
+                        float after = elem.second;
+                        float before = recallsBefore[value];
+                        file << "\n\t Recall@" << value << "\t" << (after-before)/before*100 << "\%";
+                    }
                 }
                 if (computeMap) {
                     file << "\n\t MAP\t\t" << ((mapAfter-mapBefore)/mapBefore)*100 << "\%";

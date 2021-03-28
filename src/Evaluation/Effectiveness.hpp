@@ -40,7 +40,7 @@ class Effectiveness {
                           std::vector<int>& rkLists_in,
                           std::vector<std::string>& imgList_in);
             //Recall
-            float computeRecall(int recallAt);
+            void fillRecallsMap(std::map<int, float>& recalls, std::string recallsToCompute);
             //MAP
             float computeMAPMeasure();
             //Precision
@@ -52,6 +52,7 @@ class Effectiveness {
 
     private:
             //Recall
+            float computeRecall(int recallAt);
             void computeShowResults(int recallAt);
             void computeAvgArray();
             float computeFinalRecall();
