@@ -53,6 +53,7 @@ Udl::Udl() {
     exec.getConfigVariable(outputRkFormat,        "OUTPUT_RK_FORMAT");
     exec.getConfigVariable(outputMatrixType,      "OUTPUT_MATRIX_TYPE");
     exec.getConfigVariable(showRkHtmlBeforeAfter, "OUTPUT_HTML_RK_BEFORE_AFTER");
+    exec.getConfigVariable(outputLogFilePath, "OUTPUT_LOG_FILE_PATH");
 
     exec.getConfigVariable(efficiencyEval,      "EFFICIENCY_EVAL");
     exec.getConfigVariable(effectivenessEval,   "EFFECTIVENESS_EVAL");
@@ -149,18 +150,18 @@ void Udl::run() {
 
     generateExecutionLog();
     std::cout << "\n***********************************************************************\n\n";
-    TxtFile::printFile("log.txt");
+    TxtFile::printFile(outputLogFilePath);
 
     releaseDataStructures();
 }
 
 /* Generates a log a file that contains the evaluation results requested by the user */
 void Udl::generateExecutionLog() {
-    std::cout << "\n Writing execution log file (log.txt) ...\n";
+    std::cout << "\n Writing execution log file (" << outputLogFilePath << ") ...\n";
 
     //open file
     std::ofstream file;
-    file.open("log.txt");
+    file.open(outputLogFilePath);
 
     file << std::fixed << std::setprecision(4); //decimal precision for recall@, map, etc.
 

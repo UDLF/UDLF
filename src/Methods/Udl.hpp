@@ -103,6 +103,7 @@ class Udl {
             std::string outputFileFormat;
             std::string outputRkFormat;
             std::string outputMatrixType;
+            std::string outputLogFilePath;
             bool hasOutput;
             bool effectivenessEval;
             bool efficiencyEval;
