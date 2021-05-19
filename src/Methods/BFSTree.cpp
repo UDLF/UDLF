@@ -82,6 +82,7 @@ void BFSTree::prepareInput() {
         } else { //SIM
             genRksFromSimMatrix();
         }
+        initSparseMatrix(matrix);
     }
 }
 
