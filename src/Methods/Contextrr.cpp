@@ -87,6 +87,7 @@ void Contextrr::prepareInput() {
             genRksFromDistMatrix();
         } else { //SIM
             genRksFromSimMatrix();
+            genDistMatrixFromRks();
         }
     } else { //RK
         genDistMatrixFromRks();
@@ -507,12 +508,12 @@ void Contextrr::execComputeNewDistsNoMin() {
 
 void Contextrr::kernelComputeNewDistancesNoMin(int posX) {
     //Retrieving Dim. IDs
-    int NPosX = cN*posX;
+    int NPosX = n*posX;
 
-    for (int posY = posX + 1; posY < cN; posY++) {
+    for (int posY = posX + 1; posY < n; posY++) {
         //Computing new distance value
         unsigned int indexXY = NPosX + posY;
-        unsigned int indexYX = cN * posY + posX;
+        unsigned int indexYX = n * posY + posX;
 
         //X x Y
         if (matrixW[indexXY] == 1) {
@@ -571,10 +572,10 @@ void Contextrr::execSortRankedLists() {
 }
 
 void Contextrr::kernelSortRankedLists(int curRL) {
-    int cNcurRL = cN*curRL;
-    float a[cN];
+    int cNcurRL = n*curRL;
+    float a[n];
 
-    for (int j = 0; j < cN; j++) {
+    for (int j = 0; j < n; j++) {
         a[j] = matrix[cNcurRL + rkLists[cNcurRL + j]];
     }
 
@@ -582,7 +583,7 @@ void Contextrr::kernelSortRankedLists(int curRL) {
     int i, j, keyR;
     float keyA;
 
-    for (j = 1; j < cN; j++) {
+    for (j = 1; j < n; j++) {
         keyA = a[j];
         keyR = rkLists[cNcurRL + j];
         i = j - 1;
@@ -599,7 +600,7 @@ void Contextrr::kernelSortRankedLists(int curRL) {
     //Setting query image at first position
     i = 0;
     //while ((rk[i]!=curRL)&&(i<cN)) {
-    while ((rkLists[cNcurRL + i] != curRL)&&(i < cN)) {
+    while ((rkLists[cNcurRL + i] != curRL)&&(i < n)) {
         i++;
     }
     if (i > 0) {

@@ -92,8 +92,6 @@ class Contextrr: public Udl {
             float maxDist = 0;
 
             //method constants
-            const int& cN = n;
-            const int& cL = l;
             const int h = 3;
             const int h2 = 9;
             const int white = 1;
