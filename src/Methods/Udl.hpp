@@ -35,6 +35,7 @@
 #include <array>
 #include <sstream>
 #include <iomanip>
+#include <algorithm>
 
 #include "Core/Exec.hpp"
 #include "Evaluation/Effectiveness.hpp"
@@ -119,6 +120,10 @@ class Udl {
             void readDistMatrix(std::string inputFile);
             void readRkListsNumeric(std::string inputFile);
             void readRkListsStr(std::string inputFile);
+
+            //automatic input file type detection
+            std::tuple<std::string, std::string> detectInputFileType(std::string inputFile);
+            bool detectInputFileTypeEnabled = false;
 
             //writing files
             void writeOutput(Effectiveness& effectiveness);

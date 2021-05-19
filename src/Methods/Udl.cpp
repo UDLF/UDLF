@@ -85,6 +85,24 @@ void Udl::run() {
         effectiveness.readClassesFile(classFile);
     }
 
+    //run automatic input file type detection if requested by the user
+    if (inputFileFormat == "AUTO") {
+        //detect input file type, supposing the file is valid
+        std::tuple<std::string, std::string> types = detectInputFileType(inputFile);
+        detectInputFileTypeEnabled = true;
+        //parse function return
+        inputFileFormat = std::get<0>(types);
+        inputRkFormat = std::get<1>(types);
+        inputMatrixType = std::get<1>(types);
+        //print input file type prediction to screen
+        if (inputFileFormat == "UNKNOWN") {
+            std::cout << "\t ERROR: Could not detected input file type!\n";
+            exit(1);
+        } else {
+            std::cout << "\t Detected input file type: " << inputFileFormat << " " << inputMatrixType << "\n";
+        }
+    }
+
     if (udlTask == "UDL") {
         readInputFile(inputFile);
 
@@ -195,6 +213,9 @@ void Udl::generateExecutionLog() {
         file << " " << inputMatrixType;
     } else {
         file << " " << inputRkFormat;
+    }
+    if (detectInputFileTypeEnabled) {
+        file << "  (automatically detected)";
     }
     if (hasOutput) {
         file << "\n Output File:      " << outputFile;
@@ -470,6 +491,119 @@ void Udl::readDistMatrix(std::string inputFile) {
     }
     inFile.close();
     std::cout << " Done! \n\n";
+}
+
+/* Supposing the input file is valid, detects its type */
+std::tuple<std::string, std::string> Udl::detectInputFileType(std::string inputFile) {
+    std::cout << "\n Analyzing input file to detect type ... [" << inputFile.c_str() << "]  \n";
+
+    // init variables
+    std::ifstream inFile;
+    std::string line;
+    const float tolerance_percent = 0.8;
+    int count = 0;
+    int num_columns = 0;
+
+    // open file
+    inFile.open(inputFile.c_str());
+    if (!inFile) {
+        std::cerr << " Unable to open file [" << inputFile << "].\n";
+        exit(1); //terminate with error
+    }
+
+    // check for letters
+    bool contains_letters = false;
+    while (std::getline(inFile, line)) {
+        // check alpha characters
+        for (auto c : line) {
+            if (isalpha(c)) {
+                contains_letters = true;
+                break;
+            }
+        }
+        // count columns
+        if (num_columns == 0) {
+            for (auto c : line) {
+                if (isspace(c)) { num_columns++; }
+            }
+        }
+    }
+    inFile.close();
+
+    // if there are letters, it probably is a string ranked list
+    if (contains_letters) {
+        return std::tuple<std::string, std::string>("RK", "STR");
+    }
+
+    // open file again
+    inFile.open(inputFile.c_str());
+    if (!inFile) {
+        std::cerr << " Unable to open rkLists file [" << inputFile << "].\n";
+        exit(1); //terminate with error
+    }
+
+    // read content into a vector
+    std::vector<std::vector<float>> content;
+    int i, j;
+    int curValue;
+    i = 0;
+    content.resize(n);
+    while (i < n) {
+        content[i].clear();
+        j = 0;
+        while (j < num_columns) {
+            inFile >> line;
+            curValue = atoi(line.c_str());
+            content[i].push_back(curValue);
+            j++;
+        }
+        char next;
+        while (inFile.get(next)) {
+            if (next == '\n') {
+                break;
+            }
+        }
+        i++;
+    }
+    inFile.close();
+
+    // check if it is a numeric ranked list
+    count = 0;
+    for (int i = 0; i < n; i++) {
+        if (i == content[i][0]) {
+            count++;
+        }
+    }
+    if (count >= tolerance_percent*n) {
+        return std::tuple<std::string, std::string>("RK", "NUM");
+    }
+
+    // check if it is a distance matrix
+    count = 0;
+    for (int i = 0; i < n; i++) {
+        int index = std::min_element(content[i].begin(), content[i].end()) - content[i].begin();
+        if (index == i) {
+            count++;
+        }
+    }
+    if (count >= tolerance_percent*n) {
+        return std::tuple<std::string, std::string>("MATRIX", "DIST");
+    }
+
+    // check if it is a similarity matrix
+    count = 0;
+    for (int i = 0; i < n; i++) {
+        int index = std::max_element(content[i].begin(), content[i].end()) - content[i].begin();
+        if (index == i) {
+            count++;
+        }
+    }
+    if (count >= tolerance_percent*n) {
+        return std::tuple<std::string, std::string>("MATRIX", "SIM");
+    }
+
+    // if nothing fits, report unknown
+    return std::tuple<std::string, std::string>("UNKNOWN", "UNKNOWN");
 }
 
 /* Writes the output file, choosing the right action (matrix, rk, ...) */
