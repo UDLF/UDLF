@@ -97,6 +97,9 @@ void RDPAC::prepareInput() {
         } else { //SIM
             genRksFromSimMatrix();
         }
+        // clear main matrix
+        initSparseMatrix(matrix);
+        W = matrix;
     }
 }
 
