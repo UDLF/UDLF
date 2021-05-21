@@ -412,7 +412,7 @@ void RDPAC::performSingleExecution() {
     for (int k_iter = k_start; k_iter <= k_end; k_iter += k_inc) {
         int curK = k_end;
 
-        std::cout << "\n\t* Running iteration for K=" << curK << "\n";
+        std::cout << "\n\t* Running iteration for K=" << k_iter << "\n";
 
         generatekNNMatrixW(curK);
 
