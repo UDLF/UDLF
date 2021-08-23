@@ -14,6 +14,7 @@ Dept. of Statistic, Applied Math. and Computing, Universidade Estadual Paulista 
 * [Execution](#execution)
 * [Documentation](#documentation)
 * [Contributing](#contributing)
+* [Cite](#cite)
 * [Contact](#contact)
 * [Acknowledgments](#acknowledgments)
 * [License](#license)
@@ -130,6 +131,28 @@ We appreciate suggestions, ideas and contributions.
 If you want to contribute, feel free to [contact us.](#contact)
 Github pull requests should be avoided because they are not part of our review process.
 To report small bugs, you can use the [issue tracker](https://github.com/UDLF/UDLF/issues) provided by GitHub.
+
+## Cite
+If you use this software, please cite
+
+ ```latex
+@inproceedings{Valem:2017:UDL:3078971.3079017,
+	author = {Valem, Lucas Pascotti and Pedronette, Daniel Carlos Guimar\~{a}es},
+	title = {An Unsupervised Distance Learning Framework for Multimedia Retrieval},
+	booktitle = {Proceedings of the 2017 ACM on International Conference on Multimedia Retrieval},
+	series = {ICMR '17},
+	year = {2017},
+	isbn = {978-1-4503-4701-3},
+	location = {Bucharest, Romania},
+	pages = {107--111},
+	numpages = {5},
+	url = {http://doi.acm.org/10.1145/3078971.3079017},
+	doi = {10.1145/3078971.3079017},
+	acmid = {3079017},
+	publisher = {ACM},
+	address = {New York, NY, USA},
+}
+```
 
 ## Contact
 **Lucas Pascotti Valem**: `lucaspascottivalem@gmail.com` or `lucas.valem@unesp.br`
