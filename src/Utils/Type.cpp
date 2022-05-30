@@ -74,16 +74,10 @@ bool Type::isIntegerPos(const std::string& str) {
 
 /* Tests if a string can be converted to an double (numeric) */
 bool Type::isNumeric(const std::string& str) {
-    std::istringstream ss(str);
-    double dbl;
-    ss >> dbl;      // try to read the number
-    ss >> std::ws;  // eat whitespace after number
-
-    if (!ss.fail() && ss.eof()) {
-        return true;  // is-a-number
-    } else {
-        return false; // not-a-number
-    }
+    std::istringstream iss(str);
+    float f;
+    iss >> std::noskipws >> f;
+    return iss.eof() && !iss.fail();
 }
 
 /* Tests if a string can be converted to a boolean */
