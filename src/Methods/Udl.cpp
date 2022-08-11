@@ -88,7 +88,12 @@ void Udl::run() {
     //run automatic input file type detection if requested by the user
     if (inputFileFormat == "AUTO") {
         //detect input file type, supposing the file is valid
-        std::tuple<std::string, std::string> types = detectInputFileType(inputFile);
+        std::tuple<std::string, std::string> types;
+        if (udlTask == "UDL") {
+            types = detectInputFileType(inputFile);
+        } else {  // fusion
+            types = detectInputFileType(fusionFiles[0]);
+        }
         detectInputFileTypeEnabled = true;
         //parse function return
         inputFileFormat = std::get<0>(types);
