@@ -35,6 +35,7 @@
 #include "Utils/Type.hpp"
 #include "Methods/Udl.hpp"
 #include "Methods/None.hpp"
+#include "Methods/RFE.hpp"
 #include "Methods/RDPAC.hpp"
 #include "Methods/BFSTree.hpp"
 #include "Methods/LHRR.hpp"
@@ -237,6 +238,9 @@ void Exec::run() {
     if (method == "NONE") {
         None none;
         none.run();
+	} else if (method == "RFE") {
+		RFE rfe;
+		rfe.run();
     } else if (method == "RDPAC") {
         RDPAC rdpac;
         rdpac.run();
