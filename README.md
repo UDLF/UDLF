@@ -21,8 +21,9 @@ Dept. of Statistic, Applied Math. and Computing, Universidade Estadual Paulista 
 
 ## Overview
 A framework of unsupervised distance learning methods for image and multimedia retrieval tasks.
-Currently, ten different [unsupervised learning methods](https://github.com/UDLF/UDLF/wiki/Methods) are implemented
-([RDPAC](https://doi.org/10.3390/jimaging7030049),
+Currently, eleven different [unsupervised learning methods](https://github.com/UDLF/UDLF/wiki/Methods) are implemented
+([RFE](https://doi.org/10.1109/TIP.2023.3268868),
+[RDPAC](https://doi.org/10.3390/jimaging7030049),
 [BFSTree](https://doi.org/10.1016/j.patcog.2020.107666),
 [LHRR](http://doi.org/10.1109/TIP.2019.2920526),
 [ContextRR](http://dl.acm.org/citation.cfm?id=1948207.1948291),
@@ -40,8 +41,7 @@ An easy guide for your first use can be found in the [software official webpage]
 Binaries are available for download in the [release page](https://github.com/UDLF/UDLF/releases).
 
 ## Compilation
-This project can be compiled by any C++ compiler that supports the C++2011 standard. We recommend `g++ 4.8.4` or later.
-There is a Makefile that can be used to compile the code. A executable called `udlf` will be generate inside the **bin/** directory.
+This project can be compiled by any C++ compiler that supports the C++2014 standard. There is a Makefile that can be used to compile the code. A executable called `udlf` will be generate inside the **bin/** directory.
 
 ## Execution
 The executable is called in the terminal:
