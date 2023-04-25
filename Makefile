@@ -73,6 +73,10 @@ RDPAC.o: $(SRC_DIR)/Methods/RDPAC.cpp
 	mkdir -p $(OBJ_DIR)
 	$(CC) $(FLAGS) -c $(SRC_DIR)/Methods/RDPAC.cpp -o $(OBJ_DIR)/RDPAC.o
 
+RFE.o: $(SRC_DIR)/Methods/RFE.cpp
+	mkdir -p $(OBJ_DIR)
+	$(CC) $(FLAGS) -c $(SRC_DIR)/Methods/RFE.cpp -o $(OBJ_DIR)/RFE.o
+
 #Evaluation
 Effectiveness.o: $(SRC_DIR)/Evaluation/Effectiveness.cpp
 	mkdir -p $(OBJ_DIR)
@@ -95,9 +99,3 @@ TxtFile.o: $(SRC_DIR)/Utils/TxtFile.cpp
 clean:
 	rm -rf $(OBJ_DIR)
 	rm -rf $(BUILD_DIR)/udlf
-
-
-#RFE
-RFE.o: $(SRC_DIR)/Methods/RFE.cpp
-	mkdir -p $(OBJ_DIR)
-	$(CC) $(FLAGS) -c $(SRC_DIR)/Methods/RFE.cpp -o $(OBJ_DIR)/RFE.o
