@@ -676,12 +676,10 @@ void RFE::reRankingByEmbSimAgg() {
 // Utils Embeddings: Inc e Sim
 float RFE::simEmb(const std::map<int, float>& di, const std::map<int, float>& dj) {
     float sim = 0;
-    for (auto it = di.cbegin(); it != di.cend(); it++) {
-        int key = it->first;
-        float vi = di.at(key);
-        if (dj.find(key) != dj.end()) {
-            float vj = dj.at(key);
-            sim += (vi*vj);
+    for (auto& pair : di) {
+        auto dj_iter = dj.find(pair.first);
+        if (dj_iter != dj.end()) {
+            sim += pair.second * dj_iter->second;
         }
     }
     return sim;
@@ -696,20 +694,22 @@ void RFE::incEmb(std::map<int, float>& d, int img, float value) {
 }
 
 void RFE::incSimByECP(int qi, int qj, float wi, float wj) {
-    const std::map<int, float>& iemb = emb[qi];
-    const std::map<int, float>& jemb = emb[qj];
-    int posi = 0;
+    const auto& iemb = emb[qi];
+    const auto& jemb = emb[qj];
 
-    for (int i : sorted_emb[qi]) {
-        float vi = iemb.at(i);
-        posi++;
-        int posj = 0;
-        for (int j : sorted_emb[qj]) {
-            float vj = jemb.at(j);
-            posj++;
-            float incValue = (vi * vj)  * wi * wj;
+    for (const int i : sorted_emb[qi]) {
+        auto it_i = iemb.find(i);
+        if (it_i == iemb.end()) continue;  // Ensure the key exists in the map
+        float vi = it_i->second;
+
+        for (const int j : sorted_emb[qj]) {
+            auto it_j = jemb.find(j);
+            if (it_j == jemb.end()) continue;  // Ensure the key exists in the map
+            float vj = it_j->second;
+
             incElems[i].insert(j);
-            matrix[((long int) n)*i + j] += incValue;
+            long int idx = static_cast<long int>(n) * i + j;
+            matrix[idx] += (vi * vj) * wi * wj;
         }
     }
 }
