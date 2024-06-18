@@ -1,4 +1,4 @@
-# [Unsupervised Distance Learning Framework](http://www.ic.unicamp.br/~dcarlos/UDLF/index.html) + OpenMP Support
+# [Unsupervised Distance Learning Framework](http://www.ic.unicamp.br/~dcarlos/UDLF/index.html) <br> + OpenMP Support
 
 This experimental version introduces OpenMP support for most implemented methods, enabling parallel execution on the CPU. It retains the same usage as the standard UDLF version but offers significantly enhanced performance.
 
@@ -44,7 +44,8 @@ The parallelization is in progress; currently, all the methods have some paralle
 Although data parallelism has been implemented, concurrent memory access points have not been parallelized.
 This allows the effectiveness results (e.g., MAP, Precision, Recall) obtained for serial and parallel executions to be the same.
 
-The table below presents performance results for various methods on a dataset of 5,000 images, comparing serial and parallel executions. Default parameters and K=50 were used for all methods. Speedups of up to 8.60x were achieved. The tests were conducted on a 12th Gen Intel(R) Core(TM) i7-12700H CPU.
+The table below presents performance values for various methods on a dataset of 5,000 images, comparing serial and parallel executions. Default parameters and K=50 were used for all methods. Speedups of up to 8.60x were achieved. The tests were conducted on a 12th Gen Intel(R) Core(TM) i7-12700H CPU.
+Please note that the speedups for each method vary depending on the dataset, and these results are just examples do not reflect all possible cases.
 
 <center>
 
@@ -64,6 +65,7 @@ The table below presents performance results for various methods on a dataset of
 </center>
 
 The usage of this version is the same of the standard UDLF version.
+
 Simply compile and run, no extra steps required.
 
 We intend to integrate OpenMP support into the main branch once we ensure it is stable.
