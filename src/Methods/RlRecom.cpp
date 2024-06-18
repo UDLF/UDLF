@@ -34,6 +34,7 @@
 
 #include <iostream>
 #include <algorithm>
+#include <omp.h>
 
 #include "RlRecom.hpp"
 
@@ -146,6 +147,7 @@ void RlRecom::execFillMatrix() {
 
 void RlRecom::execFillPosMatrix() {
     std::cout << "\n\t Fill Distance Matrix with Positions ... \n";
+    #pragma omp parallel for
     for (int i = 0; i < n; i++) {
         kernelFillPosMatrix(i);
     }
@@ -153,6 +155,7 @@ void RlRecom::execFillPosMatrix() {
 
 void RlRecom::execCalcCohesion() {
     std::cout << "\n\t Calculate Cohesions ... \n";
+    #pragma omp parallel for
     for (int i = 0; i < n; i++) {
         kernelCalcCohesion(i);
     }
@@ -167,6 +170,7 @@ void RlRecom::execPerformRecommendations() {
 
 void RlRecom::execSortRankedLists() {
     std::cout << "\n\t Sort Ranked Lists ... \n";
+    #pragma omp parallel for
     for (int i = 0; i < n; i++) {
         kernelSortRankedLists(i);
     }

@@ -33,6 +33,7 @@
  */
 
 #include <iostream>
+#include <omp.h>
 
 #include "BFSTree.hpp"
 
@@ -134,6 +135,7 @@ void BFSTree::computeWDiffusion() {
 
     std::cout << " - Computing W Diffusion L...\n";
 
+    #pragma omp parallel for
     for (int imgI = 0; imgI < n; imgI++) {
         for (int posJ = 0; posJ < l; posJ++) {
             int imgJ = getRKElem(imgI, posJ);
@@ -192,6 +194,7 @@ inline void BFSTree::incSimW(int img1, int img2, float newSim) {
 
 void BFSTree::acumBFSTree() {
     std::cout << " - Computing RL Tree Increments ... \n";
+    #pragma omp parallel for
     for (int qimg = 0; qimg < n; qimg++) {
         computeIncTree(qimg);
     }
@@ -260,7 +263,8 @@ void BFSTree::computeRankNormalization(int type)
     std::cout << " - Computing Rank Normalization " << type << " ...\n";
 
     switch (type) {
-        case 1: 
+        case 1:
+            #pragma omp parallel for
             for (int qImg = 0; qImg < n; qImg++) {
                 for (int pos = 0; pos < l; pos++) {
                     int img = getRKElem(qImg, pos);
@@ -272,6 +276,7 @@ void BFSTree::computeRankNormalization(int type)
             }
             break;
         case 2:
+            #pragma omp parallel for
             for (int qImg = 0; qImg < n; qImg++) {
                 for (int pos = 0; pos < l; pos++) {
                     int img = getRKElem(qImg, pos);
@@ -292,7 +297,8 @@ void BFSTree::computeRankNormalization2(int type)
     std::cout << " - Computing Rank Normalization " << type << " ...\n";
 
     switch (type) {
-        case 1: 
+        case 1:
+            #pragma omp parallel for
             for (int qImg = 0; qImg < n; qImg++) {
                 for (int pos = 0; pos < l; pos++) {
                     int img = getRKElem(qImg, pos);
@@ -304,6 +310,7 @@ void BFSTree::computeRankNormalization2(int type)
             }
             break;
         case 2:
+            #pragma omp parallel for
             for (int qImg = 0; qImg < n; qImg++) {
                 for (int pos = 0; pos < l; pos++) {
                     int img = getRKElem(qImg, pos);
@@ -326,6 +333,7 @@ void BFSTree::computeRankNormalization2(int type)
 void BFSTree::execSortRankedLists()
 {
     std::cout << "\n\t Sort Ranked Lists ... \n";
+    #pragma omp parallel for
     for (int i = 0; i < n; i++) {
         kernelSortRankedLists(i);
     }
@@ -381,6 +389,7 @@ void BFSTree::kernelSortRankedLists(int rk)
 void BFSTree::execSortRankedLists2()
 {
     std::cout << "\n\t Sort Ranked Lists ... \n";
+    #pragma omp parallel for
     for (int i = 0; i < n; i++) {
         kernelSortRankedLists2(i);
     }
@@ -445,6 +454,7 @@ void BFSTree::computeRankCorrelation()
     imgCor.clear();
     imgCor.resize(n);
 
+    #pragma omp parallel for
     for (int qImg = 0; qImg < n; qImg++) {
         imgCor[qImg][qImg] = 1.0;
         for (int pos = 0; pos < k; pos++) {

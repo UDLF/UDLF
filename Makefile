@@ -1,6 +1,6 @@
 CC        = g++
 CCOPTION  = I./src std=gnu++14 O3
-FLAGS     = $(addprefix -,$(CCOPTION))
+FLAGS     = $(addprefix -,$(CCOPTION)) -fopenmp
 OBJ       = Main.o Exec.o Validation.o Udl.o None.o Cprr.o RlRecom.o RlSim.o Contextrr.o ReckNNGraph.o RkGraph.o CorrelationGraph.o Effectiveness.o Type.o Time.o TxtFile.o LHRR.o BFSTree.o RDPAC.o RFE.o
 OBJ_DIR   = obj
 SRC_DIR   = src

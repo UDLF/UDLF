@@ -34,6 +34,7 @@
 
 #include <iostream>
 #include <algorithm>
+#include <omp.h>
 
 #include "CorrelationGraph.hpp"
 
@@ -237,6 +238,7 @@ void CorrelationGraph::runCorrelationGraphReRanking() {
 
 void CorrelationGraph::computeFinalDistances() {
     //Normalization
+    #pragma omp parallel for
     for (int i = 0; i < n; i++) {
         double acum =0;
         for (int j = 0; j < n; j++) {
@@ -260,6 +262,7 @@ void CorrelationGraph::cleanCorrelationValues() {
 }
 
 void CorrelationGraph::computeCorrelationForKNN() {
+    #pragma omp parallel for
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < l; j++) {
             int img = rkLists[i*l + j];
@@ -281,6 +284,7 @@ void CorrelationGraph::cleanGraphStructures() {
 void CorrelationGraph::buildCorrelationGraph() {
     std::cout << "\n \t # Building Correlation Graph... \n";
     initializeGraph();
+    #pragma omp parallel for
     for (int i = 0; i < n; i++) {
         for (int j = 1; j < l; j++) {
             if (correlationList[i][j] >= curThreshold) {
@@ -475,6 +479,7 @@ void CorrelationGraph::incDistance(int i, int j, double inc) {
 
 void CorrelationGraph::execSortRankedLists() {
     std::cout << "\n\t Sort Ranked Lists ... \n";
+    #pragma omp parallel for
     for (int i = 0; i < n; i++) {
         reRankingImageHeapSort(i);
     }

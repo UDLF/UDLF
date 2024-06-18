@@ -34,6 +34,7 @@
  */
 
 #include <iostream>
+#include <omp.h>
 
 #include "Cprr.hpp"
 
@@ -194,6 +195,7 @@ void Cprr::runFusionMethod() {
 
 void Cprr::execFillPosMatrix() {
     std::cout << "\n\t Fill Distance Matrix with Positions ... \n";
+    #pragma omp parallel for
     for (int i = 0; i < n; i++) {
         kernelFillPosMatrix(i);
     }
@@ -201,6 +203,7 @@ void Cprr::execFillPosMatrix() {
 
 void Cprr::execSortRankedLists() {
     std::cout << "\n\t Sort Ranked Lists ... \n";
+    #pragma omp parallel for
     for (int i = 0; i < n; i++) {
         kernelSortRankedLists(i);
     }
@@ -208,6 +211,7 @@ void Cprr::execSortRankedLists() {
 
 void Cprr::execSortRankedListsZero() {
     std::cout << "\n\t Sort Ranked Lists (Zero) ... \n";
+    #pragma omp parallel for
     for (int i = 0; i < n; i++) {
         kernelSortRankedListsZero(i);
     }
@@ -215,6 +219,7 @@ void Cprr::execSortRankedListsZero() {
 
 void Cprr::execSortRankedListsAgg(std::vector<std::vector<int>>& rk) {
     std::cout << "\n\t Sort Ranked Lists (Fusion) ... \n";
+    #pragma omp parallel for
     for (int i = 0; i < n; i++) {
         kernelSortRankedListsAgg(i, rk);
     }
@@ -222,6 +227,7 @@ void Cprr::execSortRankedListsAgg(std::vector<std::vector<int>>& rk) {
 
 void Cprr::execCartProd() {
     std::cout << "\n\t Cartesian Product ... \n";
+    //#pragma omp parallel for
     for (int i = 0; i < n; i++) {
         kernelCartProd(i);
     }
@@ -229,6 +235,7 @@ void Cprr::execCartProd() {
 
 void Cprr::execReverseCartProd() {
     std::cout << "\n\t Reverse Cartesian Product ... \n";
+    //#pragma omp parallel for
     for (int i = 0; i < n; i++) {
         kernelReverseCartProd(i);
     }

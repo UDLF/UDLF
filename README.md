@@ -1,4 +1,7 @@
-# [Unsupervised Distance Learning Framework](http://www.ic.unicamp.br/~dcarlos/UDLF/index.html)
+# [Unsupervised Distance Learning Framework](http://www.ic.unicamp.br/~dcarlos/UDLF/index.html) + OpenMP Support
+
+This experimental version introduces OpenMP support for most implemented methods, enabling parallel execution on the CPU. It retains the same usage as the standard UDLF version but offers significantly enhanced performance.
+
 
 [Access the official software webpage >>](http://www.ic.unicamp.br/~dcarlos/UDLF/index.html)
 
@@ -8,6 +11,7 @@ Dept. of Statistic, Applied Math. and Computing, Universidade Estadual Paulista 
 
 ----------------------
 * [Overview](#overview)
+* [OpenMP Support](#openmp-support)
 * [Get Started](#get-started)
 * [Binaries](#binaries)
 * [Compilation](#compilation)
@@ -33,6 +37,36 @@ Currently, eleven different [unsupervised learning methods](https://github.com/U
 [ReckNNGraph](http://dx.doi.org/10.1016/j.imavis.2013.12.009),
 [RL-Recom](http://dx.doi.org/10.1145/2671188.2749336),
 and [RL-Sim*](http://dx.doi.org/10.1145/2671188.2749335)).
+
+## OpenMP Support
+This experimental version achieves significantly improved performance through parallel CPU execution enabled by OpenMP support.
+The parallelization is in progress; currently, all the methods have some parallelization except ReckNNGraph.
+Although data parallelism has been implemented, concurrent memory access points have not been parallelized.
+This allows the effectiveness results (e.g., MAP, Precision, Recall) obtained for serial and parallel executions to be the same.
+
+The table below presents performance results for various methods on a dataset of 5,000 images, comparing serial and parallel executions. Default parameters and K=50 were used for all methods. Speedups of up to 8.60x were achieved. The tests were conducted on a 12th Gen Intel(R) Core(TM) i7-12700H CPU.
+
+<center>
+
+| **Method**     | Serial   | Parallel | **Speedup**  |
+|----------------|----------|-----------|--------------|
+| **BFSTREE**    | 26.28 s  | 3.06 s    | **<span style="color:green">8.60x</span>**  |
+| **RKGRAPH**    | 21.26 s  | 2.79 s    | **<span style="color:green">7.61x</span>**  |
+| **RLSIM**      | 11.48 s  | 1.54 s    | **<span style="color:green">7.45x</span>**  |
+| **CORGRAPH**   | 7.51 s   | 1.47 s    | **<span style="color:green">5.12x</span>**  |
+| **RLRECOM**    | 1.17 s   | 0.29 s    | **<span style="color:green">3.98x</span>**  |
+| **RFE**        | 36.38 s  | 9.67 s    | **<span style="color:green">3.76x</span>**  |
+| **RDPAC**      | 25.74 s  | 14.69 s   | **<span style="color:green">1.75x</span>**  |
+| **CPRR**       | 0.19 s   | 0.11 s    | **<span style="color:green">1.71x</span>**  |
+| **CONTEXTRR**  | 8.50 s   | 5.52 s    | **<span style="color:green">1.54x</span>**  |
+| **LHRR**       | 3.47 s   | 2.55 s    | **<span style="color:green">1.36x</span>**  |
+
+</center>
+
+The usage of this version is the same of the standard UDLF version.
+Simply compile and run, no extra steps required.
+
+We intend to integrate OpenMP support into the main branch once we ensure it is stable.
 
 ## Get Started
 An easy guide for your first use can be found in the [software official webpage](http://www.ic.unicamp.br/%7Edcarlos/UDLF/getStarted.html).
@@ -164,3 +198,4 @@ The authors are grateful to São Paulo Research Foundation - [FAPESP](http://www
 
 ## License
 This project is licensed under GPLv2. See [details.](https://github.com/UDLF/UDLF/blob/master/LICENSE)
+

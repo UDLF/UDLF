@@ -23,6 +23,7 @@
 
 #include <iostream>
 #include <math.h>
+#include <omp.h>
 
 #include "RFE.hpp"
 
@@ -100,7 +101,7 @@ void RFE::prepareOutput() {
 }
 
 void RFE::runUdlMethod() {
-    std::cout << "\n Executing GEMB!\n\n";
+    std::cout << "\n Executing RFE!\n\n";
 
     rankNorm();
 
@@ -179,6 +180,7 @@ void RFE::runFusionMethod() {
 
 void RFE::rankNorm() {
     std::cout << "\t [+] Normalizing Rankings ...\n";
+    #pragma omp parallel for
     for (int q = 0; q < n; q++) {
         for (int i = 0; i < l; i++) {
             int img_rl_i = rkLists[l*q + i];
@@ -469,6 +471,7 @@ bool cmp(std::pair<int, float>& a, std::pair<int, float>& b) {
 void RFE::sortEmb() {
     sorted_emb.clear();
     sorted_emb.resize(n);
+    #pragma omp parallel for
     for (int q = 0; q < n; q++) {
         // Declare vector of pairs
         std::vector<std::pair<int, float>> A;
@@ -527,6 +530,7 @@ std::vector<int> tag_sort(const std::vector<T>& v)
 void RFE::effectEstimationEmb() {
     ee.clear();
     ee.resize(n);
+    #pragma omp parallel for
     for (int q = 0; q < n; q++) {
         auto qemb = emb[q];
         float eeValue = 0;
@@ -561,7 +565,7 @@ void RFE::reRankingByCPRR() {
         incSimByECP(q, q, value, 1);
     }
 
-
+    #pragma omp parallel for
     for (int q = 0; q < n; q++) {
         int pos = 1;
         for (int i = 0; i < l; i++) {
@@ -573,6 +577,7 @@ void RFE::reRankingByCPRR() {
     }
 
     std::cout << "\n\t\t [*] Sort Ranked Lists ... \n";
+    #pragma omp parallel for
     for (int q = 0; q < n; q++) {
         std::set<int> result;
         std::set_difference(incElems[q].cbegin(), incElems[q].cend(), incElemsL[q].cbegin(), incElemsL[q].cend(), std::inserter(result, result.cend()));
@@ -583,6 +588,7 @@ void RFE::reRankingByCPRR() {
 void RFE::createEmb() {
     std::cout << "\t\t [*] Creating Embeddings ... \n";
     emb.clear();
+    #pragma omp parallel for
     for (int q = 0; q < n; q++) {
         std::map<int, float> qemb;
         for (int pos1 = 0; pos1 < k; pos1++) {
@@ -632,6 +638,7 @@ void RFE::createReverseEmb() {
 }
 
 void RFE::combineReverseEmb() {
+    #pragma omp parallel for
     for (int q = 0; q < n; q++) {
             std::map<int, float> qemb = emb[q];
             for (auto it = qemb.cbegin(); it != qemb.cend(); it++) {
@@ -648,6 +655,7 @@ float RFE::rankKScore(int pos) {
 void RFE::reRankingByEmbSim() {
     std::cout << "\t\t [*] Computing Similarities between Embeddings ... \n";
     initSparseMatrix(matrix);
+    #pragma omp parallel for
     for (int q = 0; q < n; q++) {
         int pos = 1;
         for (int i = 0; i < l; i++) {
@@ -663,6 +671,7 @@ void RFE::reRankingByEmbSim() {
 void RFE::reRankingByEmbSimAgg() {
     std::cout << "\t\t [*] Computing Similarities between Embeddings (Agg) ... \n";
     initSparseMatrix(matrix);
+    #pragma omp parallel for
     for (int q = 0; q < n; q++) {
         for (int i = 0; i < rkListsAgg[q].size(); i++) {
             int img_i = rkListsAgg[q][i];
@@ -697,6 +706,7 @@ void RFE::incSimByECP(int qi, int qj, float wi, float wj) {
     const auto& iemb = emb[qi];
     const auto& jemb = emb[qj];
 
+    #pragma omp parallel for
     for (const int i : sorted_emb[qi]) {
         auto it_i = iemb.find(i);
         if (it_i == iemb.end()) continue;  // Ensure the key exists in the map
@@ -716,6 +726,7 @@ void RFE::incSimByECP(int qi, int qj, float wi, float wj) {
 
 void RFE::execSortRankedLists() {
     std::cout << "\n\t\t [*] Sort Ranked Lists ... \n";
+    #pragma omp parallel for
     for (int i = 0; i < n; i++) {
         kernelSortRankedLists(i);
     }
@@ -834,6 +845,7 @@ void RFE::kernelSortRankedLists_extra(int rk, std::set<int> extra_elems) {
 
 void RFE::execSortRankedListsAgg(std::vector<std::vector<int>>& rk) {
     std::cout << "\n\t Sort Ranked Lists (Fusion) ... \n";
+    #pragma omp parallel for
     for (int i = 0; i < n; i++) {
         kernelSortRankedListsAgg(i, rk);
     }

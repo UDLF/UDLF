@@ -33,6 +33,7 @@
  */
 
 #include <iostream>
+#include <omp.h>
 
 #include "RDPAC.hpp"
 
@@ -140,6 +141,7 @@ void RDPAC::generateFullLMatrixW() {
 }
 
 void RDPAC::copyMatrices(float* src, float* dst, long int lim) {
+    #pragma omp parallel for
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < lim; j++) {
             int img = getRKElem(i, j);
@@ -358,6 +360,7 @@ void RDPAC::sumIdentityAlpha(float alpha) {
 void RDPAC::multiplyL1(float* m1, float* m2, float* dst) {
     float* tmpColumn = tmpLine;
     for (int jc = 0; jc < l_mult*l; jc++) {
+        #pragma omp parallel for
         for (int i = 0; i < n; i++) {
             int j = getRKElem(i, jc);
             tmpColumn[i] = 0;
@@ -365,6 +368,7 @@ void RDPAC::multiplyL1(float* m1, float* m2, float* dst) {
                 tmpColumn[i] += getMatrixElem(m1, i, l) * getMatrixElem(m2, l, j);
             }
         }
+        #pragma omp parallel for
         for (int i = 0; i < n; i++) {
             int j = getRKElem(i, jc);
             setMatrixElem(dst, i, j, tmpColumn[i]);
@@ -375,7 +379,7 @@ void RDPAC::multiplyL1(float* m1, float* m2, float* dst) {
 void RDPAC::multiplyL2(float* m1, float* m2, float* dst) {
     float* tmpMatrix = NULL;
     initSparseMatrix(tmpMatrix);
-
+    #pragma omp parallel for
     for (int i = 0; i < n; i++) {
         std::vector<int> listNonZero = nonZero[i];
         for (int jc = 0; jc < l_mult*l; jc++) { // change to 2l later

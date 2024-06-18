@@ -40,6 +40,7 @@
  */
 
 #include <iostream>
+#include <omp.h>
 
 #include "RlSim.hpp"
 
@@ -135,6 +136,7 @@ void RlSim::runFusionMethod() {
 
 void RlSim::execUpdateDistances() {
     std::cout << "\n\t Update Distances ... \n";
+    #pragma omp parallel for
     for (int i = 0; i < n; i++) {
         kernelUpdateDistances(i);
     }
@@ -142,6 +144,7 @@ void RlSim::execUpdateDistances() {
 
 void RlSim::execSortRankedLists() {
     std::cout << "\n\t Sort Ranked Lists ... \n";
+    #pragma omp parallel for
     for (int i = 0; i < n; i++) {
         kernelSortRankedLists(i);
     }

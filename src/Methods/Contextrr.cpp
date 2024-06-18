@@ -33,6 +33,7 @@
  */
 
 #include <iostream>
+#include <omp.h>
 
 #include "Contextrr.hpp"
 
@@ -193,6 +194,7 @@ void Contextrr::contextImgProc() {
 
 void Contextrr::execContextImgProc() {
     std::cout << "\n\t Processing context images ... \n";
+    #pragma omp parallel for
     for (int i = 0; i < n; i++) {
         for (int j = 0;j < k; j++) {
             kernelCtxImageProc(i, j);
@@ -482,6 +484,7 @@ void Contextrr::searchCurrentMaxDistance() {
     std::cout << "\n\t Search current max distance ... \n";
     if (curIteration == 1) {
         maxDist = 0;
+        #pragma omp parallel for
         for (long int i = 0; i < n2; i++) {
             maxDist = std::max(matrix[i], maxDist);
         }
@@ -501,6 +504,7 @@ void Contextrr::execComputeNewDists() {
 
 void Contextrr::execComputeNewDistsNoMin() {
     std::cout << "\n\t Computing new distances - No Min ... \n";
+    #pragma omp parallel for
     for (int i = 0; i < n; i++) {
         kernelComputeNewDistancesNoMin(i);
     }
@@ -566,6 +570,7 @@ void Contextrr::normalizeMinDistances() {
 
 void Contextrr::execSortRankedLists() {
     std::cout << "\n\t Sorting ranked lists ... \n";
+    #pragma omp parallel for
     for (int i = 0; i < n; i++) {
         kernelSortRankedLists(i);
     }

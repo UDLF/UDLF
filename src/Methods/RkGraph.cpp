@@ -34,6 +34,7 @@
  */
 
 #include <iostream>
+#include <omp.h>
 
 #include "RkGraph.hpp"
 
@@ -155,6 +156,7 @@ void RkGraph::computeMutualRankDists() {
         matrix[i] = 2*l;
     }
 
+    #pragma omp parallel for
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < l; j++) {
             int imgj = rkLists[l*i + j];
@@ -181,11 +183,13 @@ void RkGraph::runIteration() {
     initGraphStructures();
 
     std::cout << "\n\n (*) Computing Similarity Metric ...";
+    #pragma omp parallel for
     for (int i = 0; i < n; i++) {
         fillSimMetricForImage(i);
     }
 
     std::cout << "\n\n (*) Incrementing Adjacencies ...";
+    #pragma omp parallel for
     for (int i = 0; i < n; i++) {
         computeIncAdjForImage(i);
     }
@@ -260,6 +264,7 @@ void RkGraph::computeIncAdjForImage(int imgq) {
 }
 
 void RkGraph::computeNewDists() {
+    #pragma omp parallel for
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < n; j++) {
             matrix[n*i + j] = 1.0/(1 + adj[n*i + j]);
@@ -288,6 +293,7 @@ void RkGraph::computeNewDists() {
 
 void RkGraph::execSortRankedLists() {
     std::cout << "\n\t Sort Ranked Lists ... \n";
+    #pragma omp parallel for
     for (int i = 0; i < n; i++) {
         kernelSortRankedLists(i);
     }

@@ -33,6 +33,7 @@
  */
 
 #include <iostream>
+#include <omp.h>
 
 #include "LHRR.hpp"
 
@@ -218,6 +219,7 @@ void LHRR::hyperGraphIteration() {
 }
 
 void LHRR::compressHE() {
+    #pragma omp parallel for
     for (int i = 0; i < n; i++) {
         //init structures
         std::vector<int> tmpImgList;
@@ -291,6 +293,7 @@ void LHRR::sortTmpList(int qimg) {
 
 void LHRR::computeHyperEdgesSimilarities() {
     std::cout << "\n\t + Similarity between Hyper Edges ...\n";
+    #pragma omp parallel for
     for (int qimg = 0; qimg < n; qimg++) {
 
         int j = 0;
@@ -325,6 +328,7 @@ void LHRR::computeHyperEdgesSimilarities() {
 
 void LHRR::computeReciprocalHyperEdgesSimilarities() {
     std::cout << "\n\t + Similarity between Reverse and Hyper Edges ...\n";
+    #pragma omp parallel for
     for (int qimg = 0; qimg < n; qimg++) {
         int j = 0;
         float tmpArr[n];
@@ -383,6 +387,7 @@ void LHRR::computeDBBySimilarities() {
 }
 
 void LHRR::resetDB(int value) {
+    #pragma omp parallel for
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < l; j++) {
             long int index = ((long int) n)*i + rkLists[l*i + j];
@@ -468,6 +473,7 @@ void LHRR::includeHyperEdgeValue(int i, int j, double value) {
 
 void LHRR::execFillPosMatrix() {
     std::cout << "\n\t Fill Distance Matrix with Positions ... \n";
+    #pragma omp parallel for
     for (int i = 0; i < n; i++) {
         kernelFillPosMatrix(i);
     }
@@ -475,6 +481,7 @@ void LHRR::execFillPosMatrix() {
 
 void LHRR::execSortRankedLists() {
     std::cout << "\n\t Sort Ranked Lists ... \n";
+    #pragma omp parallel for
     for (int i = 0; i < n; i++) {
         kernelSortRankedLists(i);
     }
@@ -586,13 +593,13 @@ void LHRR::sortAll(int qimg) {
 
     for (int i = 0; i < l; i++) {
         int img = rkLists[l*qimg + i];
-    long int index = ((long int) n)*qimg + img;
+        long int index = ((long int) n)*qimg + img;
         rkTmp.push_back(std::make_pair(img, matrix[index]));
     }
 
     for (int i = 0; i < tmpList[qimg].size(); i++) {
         int img = tmpList[qimg][i];
-    long int index = ((long int) n)*qimg + img;
+        long int index = ((long int) n)*qimg + img;
         rkTmp.push_back(std::make_pair(img, matrix[index]));
     }
 
